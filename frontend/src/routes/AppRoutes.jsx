@@ -16,24 +16,16 @@ import Products from "../pages/Products/Products";
 import Services from "../pages/Services/Services";
 import Bookings from "../pages/Bookings/Bookings";
 import Profile from "../pages/Profile/Profile";
-
+import Reviews from "../pages/Reviews/Reviews";
 import ProtectedRoute from "./guards/ProtectedRoute";
 import Users from "../pages/Admin/Users";
-
-
 function AppRoutes() {
-
     return (
-
         <BrowserRouter>
 
             <Routes>
 
-
-                {/* Public Pages */}
-
                 <Route element={<MainLayout />}>
-
                     <Route path="/" element={<Home />} />
 
                     <Route path="/login" element={<Login />} />
@@ -44,12 +36,7 @@ function AppRoutes() {
                         path="/forgot-password"
                         element={<ForgotPassword />}
                     />
-
                 </Route>
-
-
-
-                {/* Dashboard Layout */}
 
                 <Route
                     element={
@@ -59,151 +46,104 @@ function AppRoutes() {
                     }
                 >
 
-
                     <Route
                         path="/dashboard"
                         element={
                             <ProtectedRoute
-                                roles={[
-                                    "admin",
-                                    "provider",
-                                    "customer"
-                                ]}
+                                roles={["admin", "provider", "customer"]}
                             >
                                 <Dashboard />
                             </ProtectedRoute>
                         }
                     />
 
-
-
                     <Route
                         path="/marketplace"
                         element={
                             <ProtectedRoute
-                                roles={[
-                                    "customer",
-                                    "admin"
-                                ]}
+                                roles={["customer", "admin"]}
                             >
                                 <Marketplace />
                             </ProtectedRoute>
                         }
                     />
 
-
-
                     <Route
                         path="/products"
                         element={
                             <ProtectedRoute
-                                roles={[
-                                    "provider",
-                                    "admin"
-                                ]}
+                                roles={["provider", "admin"]}
                             >
                                 <Products />
                             </ProtectedRoute>
                         }
                     />
 
-
-
                     <Route
                         path="/services"
                         element={
                             <ProtectedRoute
-                                roles={[
-                                    "provider",
-                                    "admin"
-                                ]}
+                                roles={["provider", "admin"]}
                             >
                                 <Services />
                             </ProtectedRoute>
                         }
                     />
 
-
-
-                    {/* Service Details - Sidebar + Topbar */}
-
-                    <Route
-                        path="/services/:id"
-                        element={
-                            <ProtectedRoute
-                                roles={[
-                                    "customer",
-                                    "provider",
-                                    "admin"
-                                ]}
-                            >
-                                <ServiceDetails />
-                            </ProtectedRoute>
-                        }
-                    />
-
-
-
                     <Route
                         path="/bookings"
                         element={
                             <ProtectedRoute
-                                roles={[
-                                    "admin",
-                                    "provider",
-                                    "customer"
-                                ]}
+                                roles={["admin", "provider", "customer"]}
                             >
                                 <Bookings />
                             </ProtectedRoute>
                         }
                     />
 
-
-
                     <Route
                         path="/profile"
                         element={
                             <ProtectedRoute
-                                roles={[
-                                    "admin",
-                                    "provider",
-                                    "customer"
-                                ]}
+                                roles={["admin", "provider", "customer"]}
                             >
                                 <Profile />
                             </ProtectedRoute>
                         }
                     />
-
-
-
                     <Route
                         path="/users"
                         element={
-                            <ProtectedRoute
-                                roles={[
-                                    "admin"
-                                ]}
-                            >
+                            <ProtectedRoute roles={["admin"]}>
                                 <Users />
                             </ProtectedRoute>
                         }
                     />
-
-
                 </Route>
-
-
-
+                <Route
+                    path="/reviews"
+                    element={
+                        <ProtectedRoute
+                            roles={["admin", "provider", "customer"]}
+                        >
+                            <Reviews />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+    path="/services/:id"
+    element={
+        <ProtectedRoute
+            roles={["customer","provider","admin"]}
+        >
+            <ServiceDetails />
+        </ProtectedRoute>
+    }
+/>
             </Routes>
 
-
         </BrowserRouter>
-
     );
-
 }
-
 
 export default AppRoutes;
